@@ -107,7 +107,7 @@ export default function PrimeCheckerPage() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 bg-gray-50"
-                placeholder="e.g., 17 or 9191162336454672e29"
+                placeholder="e.g., 17 or 919116233645467220463608418923"
               />
             </div>
           </div>
