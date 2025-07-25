@@ -1,45 +1,46 @@
 "use client";
 
-import { useState } from "react";
-
-function primeFactors(n: number): number[] {
-  const factors: number[] = [];
-  let num = Math.abs(n);
-  let divisor = 2;
-
-  while (num >= 2) {
-    if (num % divisor === 0) {
-      factors.push(divisor);
-      num = num / divisor;
-    } else {
-      divisor++;
-    }
-  }
-
-  return factors;
-}
+import { useEffect, useRef, useState, useCallback } from "react";
 
 export default function FactorizerPage() {
   const [input, setInput] = useState("");
-  const [result, setResult] = useState<number[]>([]);
+  const [result, setResult] = useState<string[]>([]);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const workerRef = useRef<Worker | null>(null);
 
-  const handleFactor = () => {
+  useEffect(() => {
+    const worker = new Worker(new URL("./primeWorker.ts", import.meta.url));
+    workerRef.current = worker;
+
+    worker.onmessage = (e) => {
+      setLoading(false);
+      const data = e.data;
+      if (data.error) {
+        setError(data.error);
+        setResult([]);
+      } else {
+        setError("");
+        setResult(data);
+      }
+    };
+
+    return () => worker.terminate();
+  }, []);
+
+  const handleFactor = useCallback(() => {
     setError("");
-    const num = parseInt(input);
-    if (isNaN(num)) {
-      setError("Please enter a valid number.");
-      setResult([]);
+    setResult([]);
+
+    const trimmed = input.trim();
+    if (!/^-?\d+$/.test(trimmed)) {
+      setError("Please enter a valid integer.");
       return;
     }
-    if (num === 0 || num === 1 || num === -1) {
-      setError("0, 1, and -1 do not have prime factorizations.");
-      setResult([]);
-      return;
-    }
-    const factors = primeFactors(num);
-    setResult(factors);
-  };
+
+    setLoading(true);
+    workerRef.current?.postMessage(trimmed);
+  }, [input]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
@@ -51,26 +52,30 @@ export default function FactorizerPage() {
         </h1>
 
         <div className="bg-white rounded-2xl shadow-xl p-6 mb-8 transform hover:scale-[1.02] transition-transform duration-300">
-          <div className="grid grid-cols-1 gap-4 mb-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Enter an integer
-              </label>
-              <input
-                type="text"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 bg-gray-50"
-                placeholder="e.g., 120"
-              />
-            </div>
+          <div className="mb-6">
+            <label
+              htmlFor="number-input"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
+              Enter a large integer
+            </label>
+            <input
+              id="number-input"
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 bg-gray-50"
+              placeholder="e.g., 987654321987654321"
+              disabled={loading}
+            />
           </div>
 
           <button
             onClick={handleFactor}
+            disabled={loading}
             className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-6 py-3 rounded-lg hover:from-purple-700 hover:to-indigo-700 transform hover:scale-105 transition-all duration-200 font-semibold shadow-lg"
           >
-            Factorize
+            {loading ? "Calculating..." : "Factorize"}
           </button>
 
           {error && (
@@ -82,7 +87,7 @@ export default function FactorizerPage() {
               <p className="text-lg font-semibold text-gray-900">
                 Prime Factors:
               </p>
-              <p className="text-xl mt-2 font-mono text-gray-800">
+              <p className="text-xl mt-2 font-mono text-gray-800 break-words">
                 {result.join(" × ")}
               </p>
             </div>
@@ -90,7 +95,7 @@ export default function FactorizerPage() {
         </div>
 
         <p className="text-center text-gray-600 text-sm">
-          Find the prime factorization of any integer instantly!
+          Efficiently computes prime factors using background threads.
         </p>
       </div>
     </div>
