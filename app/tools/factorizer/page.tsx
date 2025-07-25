@@ -42,43 +42,57 @@ export default function FactorizerPage() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-8 bg-gradient-to-br from-blue-50 to-cyan-100 min-h-screen flex flex-col">
-      <h1 className="text-4xl font-extrabold mb-8 text-blue-800 tracking-tight text-center">
-        Prime Factorizer
-      </h1>
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto">
+        <h1 className="text-4xl font-extrabold text-center text-gray-900 mb-8 tracking-tight">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600">
+            Prime Factorizer
+          </span>
+        </h1>
 
-      <div className="mb-6">
-        <label className="block font-semibold mb-2 text-blue-700">
-          Enter an integer:
-        </label>
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          className="w-full p-3 border-2 border-blue-300 rounded-lg bg-white shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
-          placeholder="e.g., 120"
-        />
-      </div>
+        <div className="bg-white rounded-2xl shadow-xl p-6 mb-8 transform hover:scale-[1.02] transition-transform duration-300">
+          <div className="grid grid-cols-1 gap-4 mb-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Enter an integer
+              </label>
+              <input
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 bg-gray-50"
+                placeholder="e.g., 120"
+              />
+            </div>
+          </div>
 
-      <button
-        onClick={handleFactor}
-        className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transform hover:scale-105 transition duration-200 font-semibold shadow-lg mx-auto"
-      >
-        Factorize
-      </button>
+          <button
+            onClick={handleFactor}
+            className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-6 py-3 rounded-lg hover:from-purple-700 hover:to-indigo-700 transform hover:scale-105 transition-all duration-200 font-semibold shadow-lg"
+          >
+            Factorize
+          </button>
 
-      {error && (
-        <p className="text-red-600 mt-6 font-medium text-center">{error}</p>
-      )}
+          {error && (
+            <p className="text-red-600 mt-6 font-medium text-center">{error}</p>
+          )}
 
-      {result.length > 0 && (
-        <div className="mt-8 bg-white p-6 rounded-xl shadow-xl border border-blue-200">
-          <p className="text-lg font-semibold text-blue-700">Prime Factors:</p>
-          <p className="text-xl mt-2 text-gray-800 font-mono">
-            {result.join(" × ")}
-          </p>
+          {result.length > 0 && !error && (
+            <div className="bg-gray-50 p-4 rounded-xl border border-gray-200 mt-6">
+              <p className="text-lg font-semibold text-gray-900">
+                Prime Factors:
+              </p>
+              <p className="text-xl mt-2 font-mono text-gray-800">
+                {result.join(" × ")}
+              </p>
+            </div>
+          )}
         </div>
-      )}
+
+        <p className="text-center text-gray-600 text-sm">
+          Find the prime factorization of any integer instantly!
+        </p>
+      </div>
     </div>
   );
 }

@@ -31,40 +31,52 @@ export default function PrimeCheckerPage() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-8 bg-gradient-to-br from-amber-50 to-orange-100 min-h-screen flex flex-col">
-      <h1 className="text-4xl font-extrabold mb-8 text-amber-800 tracking-tight text-center">
-        Prime Number Checker
-      </h1>
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto">
+        <h1 className="text-4xl font-extrabold text-center text-gray-900 mb-8 tracking-tight">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600">
+            Prime Number Checker
+          </span>
+        </h1>
 
-      <div className="mb-6">
-        <label className="block font-semibold mb-2 text-amber-700">
-          Enter a number
-        </label>
-        <input
-          type="number"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          className="w-full p-3 border-2 border-amber-300 rounded-lg bg-white shadow-md focus:outline-none focus:ring-2 focus:ring-amber-500 transition duration-200"
-          placeholder="e.g., 17"
-        />
-      </div>
+        <div className="bg-white rounded-2xl shadow-xl p-6 mb-8 transform hover:scale-[1.02] transition-transform duration-300">
+          <div className="grid grid-cols-1 gap-4 mb-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Enter a number
+              </label>
+              <input
+                type="number"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 bg-gray-50"
+                placeholder="e.g., 17"
+              />
+            </div>
+          </div>
 
-      <button
-        onClick={handleCheck}
-        className="bg-amber-600 text-white px-6 py-3 rounded-lg hover:bg-amber-700 transform hover:scale-105 transition duration-200 font-semibold shadow-lg mx-auto"
-      >
-        Check Prime
-      </button>
+          <button
+            onClick={handleCheck}
+            className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-6 py-3 rounded-lg hover:from-purple-700 hover:to-indigo-700 transform hover:scale-105 transition-all duration-200 font-semibold shadow-lg"
+          >
+            Check Prime
+          </button>
 
-      {error && (
-        <p className="text-red-600 mt-6 font-medium text-center">{error}</p>
-      )}
+          {error && (
+            <p className="text-red-600 mt-6 font-medium text-center">{error}</p>
+          )}
 
-      {result && !error && (
-        <div className="mt-8 bg-white p-6 rounded-xl shadow-xl border border-amber-200 text-lg text-gray-800">
-          {result}
+          {result && !error && (
+            <div className="bg-gray-50 p-4 rounded-xl border border-gray-200 mt-6">
+              <p className="text-lg font-semibold text-gray-800">{result}</p>
+            </div>
+          )}
         </div>
-      )}
+
+        <p className="text-center text-gray-600 text-sm">
+          Check if a number is prime instantly!
+        </p>
+      </div>
     </div>
   );
 }

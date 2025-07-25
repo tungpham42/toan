@@ -57,58 +57,80 @@ export default function StatisticsTool() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-8 bg-gradient-to-br from-indigo-50 to-blue-100 min-h-screen flex flex-col">
-      <h1 className="text-4xl font-extrabold mb-6 text-indigo-800 tracking-tight text-center">
-        Statistics Calculator
-      </h1>
-      <textarea
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        placeholder="Enter numbers separated by spaces or commas"
-        className="w-full p-4 border-2 border-indigo-300 rounded-lg mb-6 h-40 bg-white shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-200"
-      />
-      <button
-        onClick={handleCalculate}
-        className="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transform hover:scale-105 transition duration-200 font-semibold shadow-lg mx-auto"
-      >
-        Calculate
-      </button>
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto">
+        <h1 className="text-4xl font-extrabold text-center text-gray-900 mb-8 tracking-tight">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600">
+            Statistics Calculator
+          </span>
+        </h1>
 
-      {stats && (
-        <div className="mt-8 bg-white p-6 rounded-xl shadow-xl border border-indigo-200">
-          <h2 className="text-2xl font-bold mb-4 text-indigo-700">Results</h2>
-          <ul className="space-y-3 font-mono text-gray-800">
-            <li className="flex justify-between border-b border-indigo-100 pb-2">
-              <strong className="text-indigo-600">Count:</strong>{" "}
-              <span>{stats.count}</span>
-            </li>
-            <li className="flex justify-between border-b border-indigo-100 pb-2">
-              <strong className="text-indigo-600">Mean:</strong>{" "}
-              <span>{stats.mean.toFixed(4)}</span>
-            </li>
-            <li className="flex justify-between border-b border-indigo-100 pb-2">
-              <strong className="text-indigo-600">Median:</strong>{" "}
-              <span>{stats.median.toFixed(4)}</span>
-            </li>
-            <li className="flex justify-between border-b border-indigo-100 pb-2">
-              <strong className="text-indigo-600">Mode:</strong>{" "}
-              <span>{stats.mode.join(", ")}</span>
-            </li>
-            <li className="flex justify-between border-b border-indigo-100 pb-2">
-              <strong className="text-indigo-600">Range:</strong>{" "}
-              <span>{stats.range.toFixed(4)}</span>
-            </li>
-            <li className="flex justify-between border-b border-indigo-100 pb-2">
-              <strong className="text-indigo-600">Variance:</strong>{" "}
-              <span>{stats.variance.toFixed(4)}</span>
-            </li>
-            <li className="flex justify-between border-b border-indigo-100 pb-2">
-              <strong className="text-indigo-600">Standard Deviation:</strong>{" "}
-              <span>{stats.stdDev.toFixed(4)}</span>
-            </li>
-          </ul>
+        <div className="bg-white rounded-2xl shadow-xl p-6 mb-8 transform hover:scale-[1.02] transition-transform duration-300">
+          <div className="grid grid-cols-1 gap-4 mb-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Numbers (separated by spaces or commas)
+              </label>
+              <textarea
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="e.g., 1 2 3 4, 5.5, 6.7"
+                className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 bg-gray-50 h-32"
+              />
+            </div>
+            <div>
+              <button
+                onClick={handleCalculate}
+                className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-6 py-3 rounded-lg hover:from-purple-700 hover:to-indigo-700 transform hover:scale-105 transition-all duration-200 font-semibold shadow-lg"
+              >
+                Calculate
+              </button>
+            </div>
+          </div>
+
+          {stats && (
+            <div className="bg-gray-50 p-4 rounded-xl border border-gray-200">
+              <h2 className="text-xl font-bold mb-4 text-gray-900">Results</h2>
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 font-mono text-gray-800">
+                <li className="flex justify-between border-b border-gray-200 pb-2">
+                  <strong className="text-purple-600">Count:</strong>{" "}
+                  <span>{stats.count}</span>
+                </li>
+                <li className="flex justify-between border-b border-gray-200 pb-2">
+                  <strong className="text-purple-600">Mean:</strong>{" "}
+                  <span>{stats.mean.toFixed(4)}</span>
+                </li>
+                <li className="flex justify-between border-b border-gray-200 pb-2">
+                  <strong className="text-purple-600">Median:</strong>{" "}
+                  <span>{stats.median.toFixed(4)}</span>
+                </li>
+                <li className="flex justify-between border-b border-gray-200 pb-2">
+                  <strong className="text-purple-600">Mode:</strong>{" "}
+                  <span>{stats.mode.join(", ")}</span>
+                </li>
+                <li className="flex justify-between border-b border-gray-200 pb-2">
+                  <strong className="text-purple-600">Range:</strong>{" "}
+                  <span>{stats.range.toFixed(4)}</span>
+                </li>
+                <li className="flex justify-between border-b border-gray-200 pb-2">
+                  <strong className="text-purple-600">Variance:</strong>{" "}
+                  <span>{stats.variance.toFixed(4)}</span>
+                </li>
+                <li className="flex justify-between border-b border-gray-200 pb-2">
+                  <strong className="text-purple-600">
+                    Standard Deviation:
+                  </strong>{" "}
+                  <span>{stats.stdDev.toFixed(4)}</span>
+                </li>
+              </ul>
+            </div>
+          )}
         </div>
-      )}
+
+        <p className="text-center text-gray-600 text-sm">
+          Enter numbers to calculate statistical measures instantly!
+        </p>
+      </div>
     </div>
   );
 }

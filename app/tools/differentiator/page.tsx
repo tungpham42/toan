@@ -25,47 +25,59 @@ export default function DifferentiatorPage() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-8 bg-gradient-to-br from-teal-50 to-cyan-100 min-h-screen flex flex-col">
-      <h1 className="text-4xl font-extrabold mb-6 text-teal-800 tracking-tight text-center">
-        Differentiator
-      </h1>
-      <p className="mb-6 text-gray-700 text-center">
-        Provide a function of{" "}
-        <code className="bg-teal-100 px-1 rounded">x</code> to compute its
-        derivative symbolically. The tool supports common polynomials,
-        exponentials, logs, and basic trigonometric forms.
-      </p>
+    <div className="min-h-screen attorno bg-gradient-to-br from-purple-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto">
+        <h1 className="text-4xl font-extrabold text-center text-gray-900 mb-8 tracking-tight">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600">
+            Differentiator
+          </span>
+        </h1>
+        <p className="mb-6 text-gray-600 text-center text-sm">
+          Provide a function of{" "}
+          <code className="bg-gray-100 px-1 rounded">x</code> to compute its
+          derivative symbolically. The tool supports common polynomials,
+          exponentials, logs, and basic trigonometric forms.
+        </p>
 
-      <div className="mb-6">
-        <label className="block font-semibold mb-2 text-teal-700">
-          Enter function of x:
-        </label>
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          className="w-full p-3 border-2 border-teal-300 rounded-lg bg-white shadow-md focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-200"
-          placeholder="e.g., x^3 + sin(x)"
-        />
-      </div>
+        <div className="bg-white rounded-2xl shadow-xl p-6 mb-8 transform hover:scale-[1.02] transition-transform duration-300">
+          <div className="grid grid-cols-1 gap-4 mb-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Enter function of x
+              </label>
+              <input
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 bg-gray-50"
+                placeholder="e.g., x^3 + sin(x)"
+              />
+            </div>
+          </div>
 
-      <button
-        onClick={compute}
-        className="bg-teal-600 text-white px-6 py-3 rounded-lg hover:bg-teal-700 transform hover:scale-105 transition duration-200 font-semibold shadow-lg mx-auto"
-      >
-        Differentiate
-      </button>
+          <button
+            onClick={compute}
+            className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-6 py-3 rounded-lg hover:from-purple-700 hover:to-indigo-700 transform hover:scale-105 transition-all duration-200 font-semibold shadow-lg"
+          >
+            Differentiate
+          </button>
 
-      {error && (
-        <p className="text-red-600 mt-6 font-medium text-center">{error}</p>
-      )}
+          {error && (
+            <p className="text-red-600 mt-6 font-medium text-center">{error}</p>
+          )}
 
-      {result && !error && (
-        <div className="mt-8 bg-white p-6 rounded-xl shadow-xl border border-teal-200">
-          <p className="text-lg font-semibold text-teal-700">Result:</p>
-          <BlockMath math={`\\frac{{d}}{{dx}} (${input}) = ${result}`} />
+          {result && !error && (
+            <div className="bg-gray-50 p-4 rounded-xl border border-gray-200 mt-6">
+              <p className="text-lg font-semibold text-gray-900">Result:</p>
+              <BlockMath math={`\\frac{{d}}{{dx}} (${input}) = ${result}`} />
+            </div>
+          )}
         </div>
-      )}
+
+        <p className="text-center text-gray-600 text-sm">
+          Compute the derivative of functions instantly!
+        </p>
+      </div>
     </div>
   );
 }

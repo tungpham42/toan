@@ -36,77 +36,86 @@ export default function NumberConverterPage() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-8 bg-gradient-to-br from-emerald-50 to-green-100 min-h-screen flex flex-col">
-      <h1 className="text-4xl font-extrabold mb-8 text-emerald-800 tracking-tight text-center">
-        Number Base Converter
-      </h1>
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto">
+        <h1 className="text-4xl font-extrabold text-center text-gray-900 mb-8 tracking-tight">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600">
+            Number Base Converter
+          </span>
+        </h1>
 
-      <div className="mb-6">
-        <label className="block font-semibold mb-2 text-emerald-700">
-          Enter Number
-        </label>
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          className="w-full p-3 border-2 border-emerald-300 rounded-lg bg-white shadow-md focus:outline-none focus:ring-2 focus:ring-emerald-500 transition duration-200"
-          placeholder="e.g., 1010"
-        />
-      </div>
+        <div className="bg-white rounded-2xl shadow-xl p-6 mb-8 transform hover:scale-[1.02] transition-transform duration-300">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            <div className="md:col-span-1">
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Enter Number
+              </label>
+              <input
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 bg-gray-50"
+                placeholder="e.g., 1010"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                From Base
+              </label>
+              <select
+                value={fromBase}
+                onChange={(e) => setFromBase(e.target.value)}
+                className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 bg-gray-50"
+              >
+                {baseOptions.map((opt) => (
+                  <option key={opt.value} value={opt.value}>
+                    {opt.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                To Base
+              </label>
+              <select
+                value={toBase}
+                onChange={(e) => setToBase(e.target.value)}
+                className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 bg-gray-50"
+              >
+                {baseOptions.map((opt) => (
+                  <option key={opt.value} value={opt.value}>
+                    {opt.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
 
-      <div className="flex flex-col md:flex-row md:space-x-6">
-        <div className="mb-6 md:mb-0">
-          <label className="block font-semibold mb-2 text-emerald-700">
-            From Base
-          </label>
-          <select
-            value={fromBase}
-            onChange={(e) => setFromBase(e.target.value)}
-            className="w-full p-3 border-2 border-emerald-300 rounded-lg bg-white shadow-md focus:outline-none focus:ring-2 focus:ring-emerald-500 transition duration-200"
+          <button
+            onClick={handleConvert}
+            className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-6 py-3 rounded-lg hover:from-purple-700 hover:to-indigo-700 transform hover:scale-105 transition-all duration-200 font-semibold shadow-lg"
           >
-            {baseOptions.map((opt) => (
-              <option key={opt.value} value={opt.value}>
-                {opt.label}
-              </option>
-            ))}
-          </select>
+            Convert
+          </button>
+
+          {error && (
+            <p className="text-red-600 mt-6 font-medium text-center">{error}</p>
+          )}
+
+          {result && !error && (
+            <div className="bg-gray-50 p-4 rounded-xl border border-gray-200 mt-6">
+              <p className="text-lg font-semibold text-gray-900">Result:</p>
+              <p className="text-xl mt-2 font-mono text-gray-800">{result}</p>
+            </div>
+          )}
         </div>
 
-        <div>
-          <label className="block font-semibold mb-2 text-emerald-700">
-            To Base
-          </label>
-          <select
-            value={toBase}
-            onChange={(e) => setToBase(e.target.value)}
-            className="w-full p-3 border-2 border-emerald-300 rounded-lg bg-white shadow-md focus:outline-none focus:ring-2 focus:ring-emerald-500 transition duration-200"
-          >
-            {baseOptions.map((opt) => (
-              <option key={opt.value} value={opt.value}>
-                {opt.label}
-              </option>
-            ))}
-          </select>
-        </div>
+        <p className="text-center text-gray-600 text-sm">
+          Convert numbers between binary, octal, decimal, and hexadecimal
+          instantly!
+        </p>
       </div>
-
-      <button
-        onClick={handleConvert}
-        className="mt-6 bg-emerald-600 text-white px-6 py-3 rounded-lg hover:bg-emerald-700 transform hover:scale-105 transition duration-200 font-semibold shadow-lg mx-auto"
-      >
-        Convert
-      </button>
-
-      {error && (
-        <p className="text-red-600 mt-6 font-medium text-center">{error}</p>
-      )}
-
-      {result && (
-        <div className="mt-8 bg-white p-6 rounded-xl shadow-xl border border-emerald-200">
-          <p className="text-lg font-semibold text-emerald-700">Result:</p>
-          <p className="mt-2 font-mono text-xl text-gray-800">{result}</p>
-        </div>
-      )}
     </div>
   );
 }

@@ -64,69 +64,85 @@ export default function QuadraticSolverPage() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-8 bg-gradient-to-br from-teal-50 to-cyan-100 min-h-screen flex flex-col">
-      <h1 className="text-4xl font-extrabold mb-8 text-teal-800 tracking-tight text-center">
-        Quadratic Equation Solver
-      </h1>
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto">
+        <h1 className="text-4xl font-extrabold text-center text-gray-900 mb-8 tracking-tight">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600">
+            Quadratic Equation Solver
+          </span>
+        </h1>
 
-      <div className="grid grid-cols-3 gap-6 mb-6">
-        <div>
-          <label className="block font-semibold mb-2 text-teal-700">a</label>
-          <input
-            type="number"
-            value={a}
-            onChange={(e) => setA(e.target.value)}
-            className="w-full p-3 border-2 border-teal-300 rounded-lg bg-white shadow-md focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-200"
-            placeholder="e.g. 1"
-          />
+        <div className="bg-white rounded-2xl shadow-xl p-6 mb-8 transform hover:scale-[1.02] transition-transform duration-300">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Coefficient a
+              </label>
+              <input
+                type="number"
+                value={a}
+                onChange={(e) => setA(e.target.value)}
+                className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 bg-gray-50"
+                placeholder="e.g., 1"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Coefficient b
+              </label>
+              <input
+                type="number"
+                value={b}
+                onChange={(e) => setB(e.target.value)}
+                className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 bg-gray-50"
+                placeholder="e.g., -3"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Coefficient c
+              </label>
+              <input
+                type="number"
+                value={c}
+                onChange={(e) => setC(e.target.value)}
+                className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 bg-gray-50"
+                placeholder="e.g., 2"
+              />
+            </div>
+          </div>
+
+          <button
+            onClick={handleSolve}
+            className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-6 py-3 rounded-lg hover:from-purple-700 hover:to-indigo-700 transform hover:scale-105 transition-all duration-200 font-semibold shadow-lg"
+          >
+            Solve
+          </button>
+
+          {error && (
+            <p className="text-red-600 mt-6 font-medium text-center">{error}</p>
+          )}
+
+          {solution && !error && (
+            <div className="bg-gray-50 p-4 rounded-xl border border-gray-200 mt-6">
+              <p className="font-semibold text-gray-900 text-lg mb-3">
+                {solution.description}
+              </p>
+              <ul className="mt-2 list-disc list-inside font-mono text-gray-800">
+                {solution.roots.map((root, i) => (
+                  <li key={i} className="py-1">{`x${
+                    solution.roots.length > 1 ? i + 1 : ""
+                  } = ${root}`}</li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
-        <div>
-          <label className="block font-semibold mb-2 text-teal-700">b</label>
-          <input
-            type="number"
-            value={b}
-            onChange={(e) => setB(e.target.value)}
-            className="w-full p-3 border-2 border-teal-300 rounded-lg bg-white shadow-md focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-200"
-            placeholder="e.g. -3"
-          />
-        </div>
-        <div>
-          <label className="block font-semibold mb-2 text-teal-700">c</label>
-          <input
-            type="number"
-            value={c}
-            onChange={(e) => setC(e.target.value)}
-            className="w-full p-3 border-2 border-teal-300 rounded-lg bg-white shadow-md focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-200"
-            placeholder="e.g. 2"
-          />
-        </div>
+
+        <p className="text-center text-gray-600 text-sm">
+          Solve quadratic equations of the form ax² + bx + c = 0 instantly!
+        </p>
       </div>
-
-      <button
-        onClick={handleSolve}
-        className="bg-teal-600 text-white px-6 py-3 rounded-lg hover:bg-teal-700 transform hover:scale-105 transition duration-200 font-semibold shadow-lg mx-auto"
-      >
-        Solve
-      </button>
-
-      {error && (
-        <p className="text-red-600 mt-6 font-medium text-center">{error}</p>
-      )}
-
-      {solution && !error && (
-        <div className="mt-8 bg-white p-6 rounded-xl shadow-xl border border-teal-200">
-          <p className="font-semibold text-teal-700 text-lg mb-3">
-            {solution.description}
-          </p>
-          <ul className="mt-2 list-disc list-inside font-mono text-gray-800">
-            {solution.roots.map((root, i) => (
-              <li key={i} className="py-1">{`x${
-                solution.roots.length > 1 ? i + 1 : ""
-              } = ${root}`}</li>
-            ))}
-          </ul>
-        </div>
-      )}
     </div>
   );
 }

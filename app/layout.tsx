@@ -1,11 +1,36 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import Header from "@/components/Header";
+import { getHostUrl } from "@/utils/getHostUrl";
 
-export const metadata: Metadata = {
-  title: "Math Tool",
-  description: "A full-featured mathematics tool",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const hostUrl = await getHostUrl();
+  return {
+    title: "Math Tools",
+    description: "A full-featured mathematics tool",
+    openGraph: {
+      title: "Math Tools",
+      description: "A full-featured mathematics tool",
+      url: hostUrl,
+      siteName: "Math Tools",
+      images: [
+        {
+          url: `${hostUrl}/1200x630.jpg`,
+          width: 1200,
+          height: 630,
+          alt: "Math Tools Open Graph Image",
+        },
+      ],
+      locale: "en_US",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Math Tools",
+      description: "A full-featured mathematics tool",
+    },
+  };
+}
 
 export default function RootLayout({
   children,
@@ -18,7 +43,7 @@ export default function RootLayout({
         <Header />
         <main className="flex-grow">{children}</main>
         <footer className="bg-gray-800 text-white text-center py-4">
-          <p className="text-sm">© 2025 Math Tool. All rights reserved.</p>
+          <p className="text-sm">© 2025 Math Tools. All rights reserved.</p>
         </footer>
       </body>
     </html>

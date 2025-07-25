@@ -20,14 +20,14 @@ function MatrixInput({
 }) {
   return (
     <div>
-      <h2 className="font-semibold mb-3 text-purple-700 text-lg">{label}</h2>
+      <h2 className="text-sm font-medium text-gray-700 mb-2">{label}</h2>
       <div className="overflow-auto">
-        <table className="table-auto border-2 border-purple-200">
+        <table className="table-auto border border-gray-200 rounded-lg">
           <tbody>
             {data.map((row, i) => (
               <tr key={i}>
                 {row.map((val, j) => (
-                  <td key={j} className="border border-purple-100 px-2 py-1">
+                  <td key={j} className="border border-gray-200 p-1">
                     <input
                       type="number"
                       value={val}
@@ -36,7 +36,7 @@ function MatrixInput({
                         newMatrix[i][j] = parseFloat(e.target.value) || 0;
                         onChange(newMatrix);
                       }}
-                      className="w-20 px-2 py-1 text-center bg-white border border-purple-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 transition duration-200"
+                      className="w-16 px-2 py-1 text-center bg-gray-50 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 transition duration-200"
                     />
                   </td>
                 ))}
@@ -51,14 +51,14 @@ function MatrixInput({
 
 function MatrixDisplay({ data }: { data: MatrixData }) {
   return (
-    <table className="table-auto border-2 border-purple-200 mt-3">
+    <table className="table-auto border border-gray-200 rounded-lg mt-3">
       <tbody>
         {data.map((row, i) => (
           <tr key={i}>
             {row.map((val, j) => (
               <td
                 key={j}
-                className="border border-purple-100 px-4 py-2 text-gray-800 text-center"
+                className="border border-gray-200 px-4 py-2 text-gray-800 text-center"
               >
                 {format(val, { precision: 4 })}
               </td>
@@ -146,145 +146,166 @@ export default function MatrixPage() {
   const showMatrixB = operation === "add" || operation === "multiply";
 
   return (
-    <div className="max-w-5xl mx-auto p-8 bg-gradient-to-br from-purple-50 to-violet-100 min-h-screen flex flex-col">
-      <h1 className="text-4xl font-extrabold mb-8 text-purple-800 tracking-tight text-center">
-        Matrix Calculator
-      </h1>
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto">
+        <h1 className="text-4xl font-extrabold text-center text-gray-900 mb-8 tracking-tight">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600">
+            Matrix Calculator
+          </span>
+        </h1>
 
-      <div className="grid md:grid-cols-2 gap-8 mb-8">
-        <div>
-          <label className="block font-semibold mb-2 text-purple-700">
-            Matrix A size:
-          </label>
-          <div className="flex gap-3 mb-3 items-center">
-            <input
-              type="number"
-              value={rowsA}
-              min={1}
-              max={5}
-              onChange={(e) =>
-                updateSize(
-                  setRowsA,
-                  setColsA,
-                  setMatrixA,
-                  +e.target.value,
-                  colsA
-                )
-              }
-              className="w-20 p-2 border-2 border-purple-300 rounded-lg bg-white shadow-md focus:outline-none focus:ring-2 focus:ring-purple-500 transition duration-200 text-center"
-            />
-            <span className="text-purple-700 font-semibold">×</span>
-            <input
-              type="number"
-              value={colsA}
-              min={1}
-              max={5}
-              onChange={(e) =>
-                updateSize(
-                  setRowsA,
-                  setColsA,
-                  setMatrixA,
-                  rowsA,
-                  +e.target.value
-                )
-              }
-              className="w-20 p-2 border-2 border-purple-300 rounded-lg bg-white shadow-md focus:outline-none focus:ring-2 focus:ring-purple-500 transition duration-200 text-center"
-            />
-          </div>
-          <MatrixInput label="Matrix A" data={matrixA} onChange={setMatrixA} />
-        </div>
-
-        {showMatrixB && (
-          <div>
-            <label className="block font-semibold mb-2 text-purple-700">
-              Matrix B size:
-            </label>
-            <div className="flex gap-3 mb-3 items-center">
-              <input
-                type="number"
-                value={rowsB}
-                min={1}
-                max={5}
-                onChange={(e) =>
-                  updateSize(
-                    setRowsB,
-                    setColsB,
-                    setMatrixB,
-                    +e.target.value,
-                    colsB
-                  )
-                }
-                className="w-20 p-2 border-2 border-purple-300 rounded-lg bg-white shadow-md focus:outline-none focus:ring-2 focus:ring-purple-500 transition duration-200 text-center"
-              />
-              <span className="text-purple-700 font-semibold">×</span>
-              <input
-                type="number"
-                value={colsB}
-                min={1}
-                max={5}
-                onChange={(e) =>
-                  updateSize(
-                    setRowsB,
-                    setColsB,
-                    setMatrixB,
-                    rowsB,
-                    +e.target.value
-                  )
-                }
-                className="w-20 p-2 border-2 border-purple-300 rounded-lg bg-white shadow-md focus:outline-none focus:ring-2 focus:ring-purple-500 transition duration-200 text-center"
-              />
+        <div className="bg-white rounded-2xl shadow-xl p-6 mb-8 transform hover:scale-[1.02] transition-transform duration-300">
+          <div className="grid grid-cols-1 gap-4 mb-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Operation
+              </label>
+              <select
+                value={operation}
+                onChange={(e) => setOperation(e.target.value)}
+                className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 bg-gray-50"
+              >
+                <option value="add">Addition (A + B)</option>
+                <option value="multiply">Multiplication (A × B)</option>
+                <option value="transpose">Transpose (Aᵗ)</option>
+                <option value="inverse">Inverse (A⁻¹)</option>
+                <option value="determinant">Determinant (det A)</option>
+              </select>
             </div>
-            <MatrixInput
-              label="Matrix B"
-              data={matrixB}
-              onChange={setMatrixB}
-            />
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Matrix A size
+                </label>
+                <div className="flex gap-3 items-center">
+                  <input
+                    type="number"
+                    value={rowsA}
+                    min={1}
+                    max={5}
+                    onChange={(e) =>
+                      updateSize(
+                        setRowsA,
+                        setColsA,
+                        setMatrixA,
+                        +e.target.value,
+                        colsA
+                      )
+                    }
+                    className="w-20 p-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 bg-gray-50 text-center"
+                  />
+                  <span className="text-gray-700 font-semibold">×</span>
+                  <input
+                    type="number"
+                    value={colsA}
+                    min={1}
+                    max={5}
+                    onChange={(e) =>
+                      updateSize(
+                        setRowsA,
+                        setColsA,
+                        setMatrixA,
+                        rowsA,
+                        +e.target.value
+                      )
+                    }
+                    className="w-20 p-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 bg-gray-50 text-center"
+                  />
+                </div>
+                <div className="mt-4">
+                  <MatrixInput
+                    label="Matrix A"
+                    data={matrixA}
+                    onChange={setMatrixA}
+                  />
+                </div>
+              </div>
+
+              {showMatrixB && (
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Matrix B size
+                  </label>
+                  <div className="flex gap-3 items-center">
+                    <input
+                      type="number"
+                      value={rowsB}
+                      min={1}
+                      max={5}
+                      onChange={(e) =>
+                        updateSize(
+                          setRowsB,
+                          setColsB,
+                          setMatrixB,
+                          +e.target.value,
+                          colsB
+                        )
+                      }
+                      className="w-20 p-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 bg-gray-50 text-center"
+                    />
+                    <span className="text-gray-700 font-semibold">×</span>
+                    <input
+                      type="number"
+                      value={colsB}
+                      min={1}
+                      max={5}
+                      onChange={(e) =>
+                        updateSize(
+                          setRowsB,
+                          setColsB,
+                          setMatrixB,
+                          rowsB,
+                          +e.target.value
+                        )
+                      }
+                      className="w-20 p-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 bg-gray-50 text-center"
+                    />
+                  </div>
+                  <div className="mt-4">
+                    <MatrixInput
+                      label="Matrix B"
+                      data={matrixB}
+                      onChange={setMatrixB}
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
-        )}
-      </div>
 
-      <div className="mb-6">
-        <label className="block font-semibold mb-2 text-purple-700">
-          Operation:
-        </label>
-        <select
-          value={operation}
-          onChange={(e) => setOperation(e.target.value)}
-          className="w-full p-3 border-2 border-purple-300 rounded-lg bg-white shadow-md focus:outline-none focus:ring-2 focus:ring-purple-500 transition duration-200"
-        >
-          <option value="add">Addition (A + B)</option>
-          <option value="multiply">Multiplication (A × B)</option>
-          <option value="transpose">Transpose (Aᵗ)</option>
-          <option value="inverse">Inverse (A⁻¹)</option>
-          <option value="determinant">Determinant (det A)</option>
-        </select>
-      </div>
+          <button
+            onClick={calculate}
+            className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-6 py-3 rounded-lg hover:from-purple-700 hover:to-indigo-700 transform hover:scale-105 transition-all duration-200 font-semibold shadow-lg"
+          >
+            Calculate
+          </button>
 
-      <button
-        onClick={calculate}
-        className="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transform hover:scale-105 transition duration-200 font-semibold shadow-lg mx-auto"
-      >
-        Calculate
-      </button>
+          {error && (
+            <p className="text-red-600 mt-6 font-medium text-center">{error}</p>
+          )}
 
-      {error && (
-        <p className="text-red-600 mt-6 font-medium text-center">{error}</p>
-      )}
-
-      {result !== null && (
-        <div className="mt-8 bg-white p-6 rounded-xl shadow-xl border border-purple-200">
-          <h2 className="font-semibold mb-3 text-purple-700 text-lg">
-            Result:
-          </h2>
-          {typeof result === "number" ? (
-            <p className="text-lg text-gray-800">
-              {format(result, { precision: 6 })}
-            </p>
-          ) : (
-            <MatrixDisplay data={result} />
+          {result !== null && !error && (
+            <div className="bg-gray-50 p-4 rounded-xl border border-gray-200 mt-6">
+              <h2 className="text-lg font-semibold text-gray-900 mb-3">
+                Result:
+              </h2>
+              {typeof result === "number" ? (
+                <p className="text-lg font-mono text-gray-800">
+                  {format(result, { precision: 6 })}
+                </p>
+              ) : (
+                <MatrixDisplay data={result} />
+              )}
+            </div>
           )}
         </div>
-      )}
+
+        <p className="text-center text-gray-600 text-sm">
+          Perform matrix operations like addition, multiplication, transpose,
+          inverse, and determinant instantly!
+        </p>
+      </div>
     </div>
   );
 }
