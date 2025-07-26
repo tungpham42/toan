@@ -66,7 +66,7 @@ export default function Header() {
               <div
                 className={`${
                   dropdownOpen ? "block" : "hidden lg:group-hover:block"
-                } absolute left-0 w-64 bg-white rounded-xl shadow-xl border border-gray-200 z-50 transform hover:scale-[1.02] transition-transform duration-300`}
+                } absolute left-0 w-64 bg-white rounded-xl shadow-xl border border-gray-200 z-50 transform hover:scale-[1.02] transition-transform duration-300 max-h-[calc(100vh-100px)] overflow-y-auto`}
               >
                 {tools.map((tool) => (
                   <Link
@@ -137,7 +137,7 @@ export default function Header() {
           <div
             className={`${
               dropdownOpen ? "block" : "hidden"
-            } w-full bg-white border-t border-gray-200`}
+            } w-full bg-white border-t border-gray-200 max-h-[calc(100vh-150px)] overflow-y-auto`}
           >
             {tools.map((tool) => (
               <Link
