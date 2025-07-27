@@ -7,7 +7,7 @@ export default function HomePage() {
             Welcome to the Math Tool
           </span>
         </h1>
-        <div className="bg-white rounded-2xl shadow-xl p-6 mb-8 transform hover:scale-[1.02] transition-transform duration-300">
+        <div className="bg-white rounded-2xl shadow-xl p-6 mb-8 transform transition-transform duration-300">
           <p className="text-lg text-gray-600 mb-4">
             Explore a collection of powerful mathematical tools designed to
             simplify calculations, solve equations, and more.

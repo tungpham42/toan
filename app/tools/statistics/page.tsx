@@ -65,7 +65,7 @@ export default function StatisticsTool() {
           </span>
         </h1>
 
-        <div className="bg-white rounded-2xl shadow-xl p-6 mb-8 transform hover:scale-[1.02] transition-transform duration-300">
+        <div className="bg-white rounded-2xl shadow-xl p-6 mb-8 transform transition-transform duration-300">
           <div className="grid grid-cols-1 gap-4 mb-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">

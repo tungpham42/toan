@@ -51,7 +51,7 @@ export default function FactorizerPage() {
           </span>
         </h1>
 
-        <div className="bg-white rounded-2xl shadow-xl p-6 mb-8 transform hover:scale-[1.02] transition-transform duration-300">
+        <div className="bg-white rounded-2xl shadow-xl p-6 mb-8 transform transition-transform duration-300">
           <div className="mb-6">
             <label
               htmlFor="number-input"
