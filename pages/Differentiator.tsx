@@ -4,6 +4,7 @@ import { useState } from "react";
 import { derivative } from "mathjs";
 import katex from "katex";
 import "katex/dist/katex.min.css";
+import formatExpressions from "@/utils/formatExpressions";
 
 export default function Differentiator() {
   const [input, setInput] = useState("x^2 + 3*x");
@@ -26,7 +27,9 @@ export default function Differentiator() {
   };
 
   const renderedMathML = katex.renderToString(
-    `\\frac{d}{dx} (${input}) = ${result}`,
+    `\\frac{d}{dx} (${formatExpressions(input)}) = ${formatExpressions(
+      result
+    )}`,
     {
       output: "mathml",
       throwOnError: false,
@@ -34,7 +37,7 @@ export default function Differentiator() {
   );
 
   return (
-    <div className="min-h-screen attorno bg-gradient-to-br from-purple-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-4xl font-extrabold text-center text-gray-900 mb-8 tracking-tight">
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600">
@@ -48,7 +51,7 @@ export default function Differentiator() {
           exponentials, logs, and basic trigonometric forms.
         </p>
 
-        <div className="bg-white rounded-2xl shadow-xl p-6 mb-8 transform transition-transform duration-300">
+        <div className="bg-white rounded-2xl shadow-xl p-6 mb-8">
           <div className="grid grid-cols-1 gap-4 mb-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -59,11 +62,9 @@ export default function Differentiator() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    compute();
-                  }
+                  if (e.key === "Enter") compute();
                 }}
-                className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 bg-gray-50"
+                className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 bg-gray-50"
                 placeholder="e.g., x^3 + sin(x)"
               />
             </div>
@@ -71,7 +72,7 @@ export default function Differentiator() {
 
           <button
             onClick={compute}
-            className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-6 py-3 rounded-lg hover:from-purple-700 hover:to-indigo-700 transform hover:scale-105 transition-all duration-200 font-semibold shadow-lg"
+            className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-6 py-3 rounded-lg hover:from-purple-700 hover:to-indigo-700 hover:scale-105 font-semibold shadow-lg transition-all"
           >
             Differentiate
           </button>
@@ -84,10 +85,8 @@ export default function Differentiator() {
             <div className="bg-gray-50 p-4 rounded-xl border border-gray-200 mt-6">
               <p className="text-lg font-semibold text-gray-900">Result:</p>
               <div
-                className="mt-6 bg-gray-50 p-4 rounded-xl border border-gray-200"
-                dangerouslySetInnerHTML={{
-                  __html: renderedMathML,
-                }}
+                className="mt-6 p-4 rounded-xl border border-gray-200 overflow-x-auto"
+                dangerouslySetInnerHTML={{ __html: renderedMathML }}
               />
             </div>
           )}
