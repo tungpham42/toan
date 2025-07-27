@@ -76,7 +76,7 @@ export default function Header() {
                   <Link
                     key={tool.href}
                     href={tool.href}
-                    className={`block px-4 py-2.5 text-sm ${
+                    className={`block px-4 py-2 text-sm ${
                       isActive(tool.href)
                         ? "bg-gray-50 text-purple-600 font-semibold"
                         : "text-gray-700 hover:bg-gray-50 hover:text-purple-600"
@@ -147,7 +147,7 @@ export default function Header() {
               <Link
                 key={tool.href}
                 href={tool.href}
-                className={`block px-4 py-2.5 text-sm ${
+                className={`block px-4 py-2 text-sm ${
                   isActive(tool.href)
                     ? "bg-gray-50 text-purple-600 font-semibold"
                     : "text-gray-700 hover:bg-gray-50 hover:text-purple-600"
