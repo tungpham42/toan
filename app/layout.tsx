@@ -1,6 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import Header from "@/components/Header";
+import BackToTopButton from "@/components/BackToTopButton";
 import { getHostUrl } from "@/utils/getHostUrl";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -45,6 +46,7 @@ export default function RootLayout({
         <footer className="bg-gray-800 text-white text-center py-4">
           <p className="text-sm">© 2025 Math Tools. All rights reserved.</p>
         </footer>
+        <BackToTopButton />
       </body>
     </html>
   );

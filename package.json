@@ -15,6 +15,7 @@
     "lucide-react": "^0.525.0",
     "mathjs": "^14.5.3",
     "mathjs-simple-integral": "^0.1.1",
+    "nerdamer": "^1.1.13",
     "next": "15.4.3",
     "plotly.js": "^3.0.3",
     "react": "19.1.0",

@@ -57,12 +57,17 @@ export default function FactorizerPage() {
               htmlFor="number-input"
               className="block text-sm font-medium text-gray-700 mb-1"
             >
-              Enter a large integer
+              Enter a numnber to factor
             </label>
             <input
               id="number-input"
               type="text"
               value={input}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleFactor();
+                }
+              }}
               onChange={(e) => setInput(e.target.value)}
               className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 bg-gray-50"
               placeholder="e.g., 987654321987654321"

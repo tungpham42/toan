@@ -11,12 +11,16 @@ const tools = [
   { label: "Graph", href: "/tools/graph" },
   { label: "Matrix", href: "/tools/matrix" },
   { label: "Differentiator", href: "/tools/differentiator" },
+  { label: "Integrator", href: "/tools/integrator" },
   { label: "Mod Calculator", href: "/tools/mod-calculator" },
   { label: "Number Converter", href: "/tools/number-converter" },
   { label: "Prime Checker", href: "/tools/prime-checker" },
   { label: "Probability", href: "/tools/probability" },
   { label: "Quadratic Solver", href: "/tools/quadratic-solver" },
   { label: "Statistics", href: "/tools/statistics" },
+  { label: "Permutation", href: "/tools/permutation" },
+  { label: "Arrangement", href: "/tools/arrangement" },
+  { label: "Combination", href: "/tools/combination" },
 ];
 
 export default function Header() {

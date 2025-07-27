@@ -73,6 +73,11 @@ export default function StatisticsTool() {
               </label>
               <textarea
                 value={input}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    handleCalculate();
+                  }
+                }}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="e.g., 1 2 3 4, 5.5, 6.7"
                 className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 bg-gray-50 h-32"
