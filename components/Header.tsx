@@ -18,6 +18,10 @@ const tools = [
   { label: "Prime Checker", href: "/tools/prime-checker" },
   { label: "Probability", href: "/tools/probability" },
   { label: "Quadratic Solver", href: "/tools/quadratic-solver" },
+  {
+    label: "System of Equations Solver",
+    href: "/tools/system-of-equations-solver",
+  },
   { label: "Statistics", href: "/tools/statistics" },
   { label: "Permutation", href: "/tools/permutation" },
   { label: "Arrangement", href: "/tools/arrangement" },
@@ -30,7 +34,7 @@ export default function Header() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const isActive = (href: string) =>
-    pathname === href || pathname.startsWith(href + "/");
+    pathname ? pathname === href || pathname.startsWith(href + "/") : false;
 
   return (
     <header className="bg-white shadow-xl sticky top-0 z-50 border-b border-gray-200">
@@ -77,7 +81,7 @@ export default function Header() {
                   <Link
                     key={tool.href}
                     href={tool.href}
-                    className={`block px-4 py-2 text-sm ${
+                    className={`block px-4 py-1.5 text-sm ${
                       isActive(tool.href)
                         ? "bg-gray-50 text-purple-600 font-semibold"
                         : "text-gray-700 hover:bg-gray-50 hover:text-purple-600"
@@ -148,7 +152,7 @@ export default function Header() {
               <Link
                 key={tool.href}
                 href={tool.href}
-                className={`block px-4 py-2 text-sm ${
+                className={`block px-4 py-1.5 text-sm ${
                   isActive(tool.href)
                     ? "bg-gray-50 text-purple-600 font-semibold"
                     : "text-gray-700 hover:bg-gray-50 hover:text-purple-600"

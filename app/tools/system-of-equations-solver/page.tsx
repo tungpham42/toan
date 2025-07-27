@@ -1,20 +1,20 @@
 import type { Metadata } from "next";
 import { getHostUrl } from "@/utils/getHostUrl";
-import Integrator from "@/pages/Integrator";
+import SystemOfEquationsSolver from "@/pages/SystemOfEquationsSolver";
 
 export async function generateMetadata(): Promise<Metadata> {
   const hostUrl = await getHostUrl();
   return {
-    title: "Math Tools - Integrator",
+    title: "Math Tools - System of Equations Solver",
     description: "A full-featured mathematics tool",
     openGraph: {
-      title: "Math Tools - Integrator",
+      title: "Math Tools - System of Equations Solver",
       description: "A full-featured mathematics tool",
-      url: `${hostUrl}/tools/integrator`,
+      url: `${hostUrl}/tools/system-of-equations-solver`,
       siteName: "Math Tools",
       images: [
         {
-          url: `${hostUrl}/1200x630_integrator.jpg`,
+          url: `${hostUrl}/1200x630_system.jpg`,
           width: 1200,
           height: 630,
           alt: "Math Tools Open Graph Image",
@@ -25,12 +25,12 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     twitter: {
       card: "summary_large_image",
-      title: "Math Tools - Integrator",
+      title: "Math Tools - System of Equations Solver",
       description: "A full-featured mathematics tool",
     },
   };
 }
 
-export default function IntegratorPage() {
-  return <Integrator />;
+export default function SystemOfEquationsSolverPage() {
+  return <SystemOfEquationsSolver />;
 }

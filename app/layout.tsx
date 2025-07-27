@@ -1,7 +1,7 @@
 import "./globals.css";
-import type { Metadata } from "next";
 import Header from "@/components/Header";
 import BackToTopButton from "@/components/BackToTopButton";
+import type { Metadata } from "next";
 import { getHostUrl } from "@/utils/getHostUrl";
 
 export async function generateMetadata(): Promise<Metadata> {

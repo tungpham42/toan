@@ -4,7 +4,7 @@ export default function HomePage() {
       <div className="max-w-4xl mx-auto text-center">
         <h1 className="text-4xl font-extrabold text-center text-gray-900 mb-8 tracking-tight">
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600">
-            Welcome to the Math Tool
+            Welcome to the Math Tools
           </span>
         </h1>
         <div className="bg-white rounded-2xl shadow-xl p-6 mb-8 transform transition-transform duration-300">
