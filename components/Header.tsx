@@ -7,8 +7,9 @@ import { Menu, X, ChevronDown } from "lucide-react";
 import MainBrandLogo from "./MainBrandLogo";
 
 const tools = [
-  { label: "Factorizer", href: "/tools/factorizer" },
+  { label: "Equation Solver", href: "/tools/equation-solver" },
   { label: "Graph", href: "/tools/graph" },
+  { label: "Factorizer", href: "/tools/factorizer" },
   { label: "Matrix", href: "/tools/matrix" },
   { label: "Differentiator", href: "/tools/differentiator" },
   { label: "Integrator", href: "/tools/integrator" },
