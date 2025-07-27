@@ -49,7 +49,7 @@ export default function GraphPlotter() {
       <div className="max-w-4xl mx-auto">
         <h1 className="text-4xl font-extrabold text-center text-gray-900 mb-8 tracking-tight">
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600">
-            Function Visualizer
+            Graph Plotter
           </span>
         </h1>
 
