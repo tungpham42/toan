@@ -33,6 +33,7 @@ const MainBrandLogo: React.FC<MainBrandLogoProps> = ({
           src={logoSrc}
           alt={altText}
           height={size}
+          width={size * 3}
           style={{
             height: "42px !important",
             borderRadius: "0 !important",
